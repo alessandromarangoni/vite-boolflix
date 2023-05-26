@@ -1,30 +1,46 @@
 <script>
 import axios from "axios";
 import { store } from '../data/store'
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 export default {
-    name: 'headerApp'
-    ,
+    name: 'headerApp',
     data() {
         return {
             store,
             apySearchMovie: 'https://api.themoviedb.org/3/search/movie',
+            apySearchTv: 'https://api.themoviedb.org/3/search/tv',
             searchtext: '',
             key: '?api_key=9733f8fbead6e5ca09b6908231558d46'
         }
     },
     methods: {
-        search(what) {
-            axios.get(`${what}${this.key}&query=${this.searchtext}`)
+        searchMovie() {
+            axios.get(`${this.apySearchMovie}${this.key}&query=${this.searchtext}`)
                 .then(r => {
                     this.store.film = (r.data.results)
-                    console.log(`${this.apySearch}${this.key}&query=${this.searchtext}`)
+                    console.log(`${this.apySearchMovie}${this.key}&query=${this.searchtext}`)
                     console.log(this.store.film)
                     console.log(this.store.film[0].title)
                 })
-        }
+        },
+        searchTv() {
+            axios.get(`${this.apySearchTv}${this.key}&query=${this.searchtext}`)
+                .then(r => {
+                    this.store.serie = (r.data.results)
+                    console.log(`${this.apySearchTv}${this.key}&query=${this.searchtext}`)
+                    console.log(this.store.serie)
+                    console.log(this.store.serie[0].name)
+                })
+        },
+        search() {
+            this.searchTv();
+            this.searchMovie()
+        },
+        getFlag(lang) {
+            return 'fi fi-' + this.flags[lang]
+        },
     }
 }
-
     // created() {
 
     // }

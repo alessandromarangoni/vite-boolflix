@@ -1,13 +1,12 @@
 <script >
 import HelloWorld from './components/HelloWorld.vue'
 import headerApp from './components/headerApp.vue';
-import axios from "axios";
 import { store } from './data/store'
 export default {
   components: {
     store,
     HelloWorld,
-    headerApp
+    headerApp,
   }
 }
 </script>

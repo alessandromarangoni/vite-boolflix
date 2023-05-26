@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "flag-icons": "^6.6.6",
+    "install": "^0.13.0",
+    "language-icons": "^0.3.0",
+    "npm": "^9.6.7",
     "sass": "^1.62.1",
-    "vue": "^3.2.47"
+    "vue": "^3.3.4",
+    "vue-country-flag-next": "^2.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

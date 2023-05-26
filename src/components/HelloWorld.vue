@@ -1,14 +1,13 @@
 <script>
 import axios from "axios"
 import { store } from '../data/store';
-
 export default {
   name: "HelloWorld",
   store,
   data() {
     return {
       movieApiList: ' https://api.themoviedb.org/3/discover/',
-      imgSrcPath: 'https://www.themoviedb.org/t/p/w440_and_h660_face',
+      imgSrcPath: 'https://image.tmdb.org/t/p/w342/',
       store
     }
   },
@@ -23,39 +22,116 @@ export default {
 </script>
 
 <template>
-  <div class="main">
-    <div>
-      <div v-for="(item, i) in this.store.film">
-        <h2>{{ item.title }}</h2>
-        <h3>{{ item.original_title }}</h3>
-        <span> {{ item.original_language }}</span>
-        <span>{{ item.vote_average }}</span>
+  <div class="container">
+    <div class="row">
+      <h2>Film</h2>
+      <div class=" items_container ">
+        <div class="items_wrapper">
+          <template v-for="(item) in this.store.film">
+            <div class="oggetto">
+              <div class="cover">
+                <img class="cover_img" :src="this.imgSrcPath + item.poster_path" :alt="item.title" />
+              </div>
+              <h4>{{ item.title }}</h4>
+              <h5>{{ item.original_title }}</h5>
+              <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
+                class="language_img">
+              <p>{{ item.vote_average }}</p>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Serie TV</h2>
+    <div class="row">
+      <div class="items_container">
+        <div class="items_wrapper">
+          <template v-for="(item) in this.store.serie">
+            <div class="oggetto">
+              <div class="cover">
+                <img class="cover_img" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
+              </div>
+              <h4>{{ item.name }}</h4>
+              <h5>{{ item.original_name }}</h5>
+              <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
+                class=" language_img">
+              <p>{{ item.vote_average }}</p>
+            </div>
+          </template>
+
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.main {
-  max-width: 1400px;
-  margin: 0 auto;
+.items_container {
+  color: white;
+}
+
+.items_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.row {
+  width: 100%;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.459);
+}
 
 
-  div {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.items_wrapper {
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background-color: red;
+  overflow-x: scroll;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
 
-    div {
-      width: calc(100% / 5);
-      display: flex;
-      flex-direction: column;
-      padding-top: 1rem;
+.oggetto {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.459);
+  min-width: 200px;
+  min-height: 300px;
 
-      h3 {
-        line-height: 1rem;
-      }
-    }
+  h4,
+  h5,
+  p {
+    padding: 1rem;
   }
+
+}
+
+.cover {
+  position: absolute;
+  min-width: 200px;
+  height: 300px;
+  background-image: url(https://www.corrierenerd.it/wp-content/uploads/2022/02/png-transparent-video-camera-graphic-film-cinema-movie-projector-camera-camera-lens-text-camera-icon-1-740x813.png);
+  background-size: contain;
+  object-fit: cover;
+
+  &:hover {
+    opacity: 0;
+  }
+
+  .cover_img {
+    width: 100%;
+
+  }
+}
+
+.language_img {
+  width: 30px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px
 }
 </style>

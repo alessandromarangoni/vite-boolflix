@@ -22,51 +22,52 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <h2>Film</h2>
-      <div class=" items_container ">
-        <div class="items_wrapper">
-          <template v-for="(item) in this.store.film">
-            <div class="oggetto">
-              <div class="cover">
-                <img class="cover_img" :src="this.imgSrcPath + item.poster_path" :alt="item.title" />
+  <div class="main">
+    <div class="container">
+      <div class="row">
+        <h2>Film</h2>
+        <div class=" items_container ">
+          <div class="items_wrapper">
+            <template v-for="(item) in this.store.film">
+              <div class="oggetto">
+                <div class="cover">
+                  <img class="cover_img" :src="this.imgSrcPath + item.poster_path" :alt="item.title" />
+                </div>
+                <div class="title"> <strong>Titolo:</strong> {{ item.title }}</div>
+                <div class="title"> <strong>Titolo originale:</strong> {{ item.original_title }}</div>
+                <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
+                  class="language_img">
+                <p>{{ item.overview }}</p>
+                <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
+                  <i class="fa-regular fa-star"></i>
+                </template>
               </div>
-              <h4>{{ item.title }}</h4>
-              <h5>{{ item.original_title }}</h5>
-              <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
-                class="language_img">
-              <p>{{ item.vote_average }}</p>
-              <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
-                <i class="fa-regular fa-star"></i>
-              </template>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <h2>Serie TV</h2>
-    <div class="row">
-      <div class="items_container">
-        <div class="items_wrapper">
-          <template v-for="(item) in this.store.serie">
-            <div class="oggetto">
-              <div class="cover">
-                <img class="cover_img" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
+    <div class="container">
+      <div class="row">
+        <h2>Serie TV</h2>
+        <div class="items_container">
+          <div class="items_wrapper">
+            <template v-for="(item) in this.store.serie">
+              <div class="oggetto">
+                <div class="cover">
+                  <img class="cover_img" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
+                </div>
+                <div class="title"><strong>Titolo:</strong>{{ item.name }}</div>
+                <div class="title"><strong>Titolo originale:</strong>{{ item.original_name }}</div>
+                <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
+                  class=" language_img">
+                <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
+                  <i class="fa-regular fa-star"></i>
+                </template>
+                <p>{{ item.overview }}</p>
               </div>
-              <h4>{{ item.name }}</h4>
-              <h5>{{ item.original_name }}</h5>
-              <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
-                class=" language_img">
-              <p>{{ item.vote_average }}</p>
-              <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
-                <i class="fa-regular fa-star"></i>
-              </template>
-            </div>
-          </template>
-
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -78,6 +79,11 @@ export default {
   color: white;
 }
 
+.main {
+  background: rgb(0, 0, 0);
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 5%, rgba(217, 0, 0, 1) 100%);
+}
+
 .items_container {
   width: 100%;
   display: flex;
@@ -86,33 +92,43 @@ export default {
 
 .row {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.459);
+  // background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+
+  h2 {
+    padding: 1rem;
+  }
 }
 
 
 .items_wrapper {
+  padding-left: 1rem;
   align-items: center;
   width: 100%;
-  height: 500px;
-  background-color: red;
-  overflow-x: scroll;
+  min-height: 200px;
+  overflow-x: auto;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   justify-content: space-between;
+  padding-bottom: 2rem;
 }
 
 .oggetto {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.459);
+  // background-color: rgba(0, 0, 0, 0.5);
   min-width: 200px;
   min-height: 300px;
+}
 
-  h4,
-  h5,
-  p {
-    padding: 1rem;
-  }
+p {
+  padding: .3rem .5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
+.title {
+  padding: .3rem .5rem;
 }
 
 .cover {
@@ -140,7 +156,7 @@ export default {
 }
 
 .fa-star {
-  padding-left: .5rem;
+  padding: .3rem .5rem;
 }
 
 .language_img {

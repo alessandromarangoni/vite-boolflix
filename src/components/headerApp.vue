@@ -47,8 +47,10 @@ export default {
 <template>
     <nav>
         <div class="container">
-            <div><input type="text" v-model="this.searchtext">quello che cerchi</div>
+            <div><img src="https://www.giuseppecaprotti.it/2019/wp-content/uploads/Netflix-Logo.png" alt=""></div>
             <div>
+                <input type="text" v-model="this.searchtext" @keyup.enter="search(this.apySearchMovie)"
+                    placeholder="quello che cerchi" class="searchbar">
                 <button @click="search(this.apySearchMovie)">cerca</button>
             </div>
         </div>
@@ -58,9 +60,28 @@ export default {
 .container {
     display: flex;
     width: 100%;
-    height: 80px;
     background-color: black;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+
+    img {
+        width: 200px;
+    }
+}
+
+.searchbar {
+    width: 250px;
+    height: 1.5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    border: 0;
+}
+
+button {
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: .25rem .5rem;
+    color: white;
+    background-color: black;
 }
 </style>

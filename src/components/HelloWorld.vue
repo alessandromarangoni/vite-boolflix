@@ -6,8 +6,10 @@ export default {
   store,
   data() {
     return {
-      movieApiList: ' https://api.themoviedb.org/3/discover/',
+      movieApiList: ' https://api.themoviedb.org/3/discover/movie',
+      tvApiList: ' https://api.themoviedb.org/3/discover/tv',
       imgSrcPath: 'https://image.tmdb.org/t/p/w342/',
+      key: '?api_key=9733f8fbead6e5ca09b6908231558d46',
       store
     }
   },
@@ -16,6 +18,28 @@ export default {
     consoleFilm() {
       console.log('ciao' + this.store.film)
     },
+    popularsFilm() {
+      axios.get(`${this.movieApiList}${this.key}`)
+        .then(r => {
+          this.store.film = (r.data.results)
+          console.log(`${this.movieApiList}${this.key}`)
+          console.log(this.store.film)
+          console.log(this.store.film[0].title)
+        })
+    },
+    popularsTv() {
+      axios.get(`${this.tvApiList}${this.key}`)
+        .then(r => {
+          this.store.serie = (r.data.results)
+          console.log(`${this.tvApiList}${this.key}`)
+          console.log(this.store.serie)
+          console.log(this.store.serie[0].name)
+        })
+    }
+  }
+  , mounted() {
+    this.popularsFilm()
+    this.popularsTv()
   }
 }
 

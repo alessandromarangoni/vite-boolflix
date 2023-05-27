@@ -37,6 +37,9 @@ export default {
               <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
                 class="language_img">
               <p>{{ item.vote_average }}</p>
+              <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
+                <i class="fa-regular fa-star"></i>
+              </template>
             </div>
           </template>
         </div>
@@ -58,6 +61,9 @@ export default {
               <img :src="`https://unpkg.com/language-icons@0.2.0/icons/${item.original_language}.svg`" alt="lang"
                 class=" language_img">
               <p>{{ item.vote_average }}</p>
+              <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
+                <i class="fa-regular fa-star"></i>
+              </template>
             </div>
           </template>
 
@@ -80,7 +86,6 @@ export default {
 
 .row {
   width: 100%;
-  justify-content: center;
   background-color: rgba(0, 0, 0, 0.459);
 }
 
@@ -115,7 +120,7 @@ export default {
   min-width: 200px;
   height: 300px;
   background-image: url(https://www.corrierenerd.it/wp-content/uploads/2022/02/png-transparent-video-camera-graphic-film-cinema-movie-projector-camera-camera-lens-text-camera-icon-1-740x813.png);
-  background-size: contain;
+  background-size: cover;
   object-fit: cover;
 
   &:hover {
@@ -124,8 +129,18 @@ export default {
 
   .cover_img {
     width: 100%;
-
+    height: 100%;
   }
+}
+
+.vote_container div {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.fa-star {
+  padding-left: .5rem;
 }
 
 .language_img {

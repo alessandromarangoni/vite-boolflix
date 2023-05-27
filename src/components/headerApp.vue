@@ -36,9 +36,6 @@ export default {
             this.searchTv();
             this.searchMovie()
         },
-        getFlag(lang) {
-            return 'fi fi-' + this.flags[lang]
-        },
     }
 }
     // created() {

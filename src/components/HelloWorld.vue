@@ -11,7 +11,11 @@ export default {
       tvApiList: ' https://api.themoviedb.org/3/discover/tv',
       imgSrcPath: 'https://image.tmdb.org/t/p/w342/',
       key: '?api_key=9733f8fbead6e5ca09b6908231558d46',
-      idPath: 'https://api.themoviedb.org/3/movie',
+      tvPath: 'https://api.themoviedb.org/3/tv/',
+      moviePath: 'https://api.themoviedb.org/3/movie/',
+      Credits: '/credits',
+      cast: [],
+      casTv: [],
     }
   },
   methods:
@@ -30,8 +34,26 @@ export default {
           console.log(`${this.tvApiList}${this.key}`)
         })
     },
-  }
-  , mounted() {
+    getCast(id) {
+      axios.get(`${this.moviePath}${id}${this.Credits}${this.key}`)
+        .then(r => {
+          this.cast.push(r.data.cast)
+          console.log(r.data.cast)
+          console.log(`${this.moviePath}${id}${this.Credits}${this.key}`)
+          console.log(this.cast)
+        })
+
+    },
+    getCastTv(id) {
+      axios.get(`${this.tvPath}${id}${this.Credits}${this.key}`)
+        .then(r => {
+          this.casTv.push(r.data.cast)
+          console.log(r.data)
+          console.log(`${this.tvPath}${id}${this.Credits}${this.key}`)
+          console.log(this.castTv)
+        })
+    }
+  }, mounted() {
     this.popularsFilm()
     this.popularsTv()
   }
@@ -48,7 +70,7 @@ export default {
           <div class="items_wrapper">
             <template v-for="(item) in this.store.film">
               <div class="oggetto">
-                <div class="cover " @click="getid(item.id)">
+                <div class="cover " @click="this.getCast(item.id, i)">
                   <img class="cover_img" :src="this.imgSrcPath + item.poster_path" :alt="item.title" />
                 </div>
                 <div class="title"> <strong>Titolo:</strong> {{ item.title }}</div>
@@ -59,6 +81,12 @@ export default {
                 <template class="vote_container" v-for="voti in Math.ceil(item.vote_average / 2)">
                   <i class="fa-regular fa-star"></i>
                 </template>
+                <p><strong> cast completo al click </strong></p>
+                <div class="cast">
+                  <template v-for=" (person, i) in this.cast[0]">
+                    <span>{{ (i + 1) + " " + person.name + ", " }}</span>
+                  </template>
+                </div>
               </div>
             </template>
           </div>
@@ -70,9 +98,9 @@ export default {
         <h2>Serie TV</h2>
         <div class="items_container">
           <div class="items_wrapper">
-            <template v-for="(item) in this.store.serie">
+            <template v-for="(item, i) in this.store.serie">
               <div class="oggetto">
-                <div class="cover">
+                <div class="cover" @click="this.getCastTv(item.id, i)">
                   <img class="cover_img" :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
                 </div>
                 <div class="title"><strong>Titolo:</strong>{{ item.name }}</div>
@@ -83,6 +111,12 @@ export default {
                   <i class="fa-regular fa-star"></i>
                 </template>
                 <p>{{ item.overview }}</p>
+                <p><strong> cast completo al click </strong></p>
+                <div class="cast">
+                  <template v-for=" (person, i) in this.casTv[0]">
+                    <span>{{ (i + 1) + " " + person.name + ", " }}</span>
+                  </template>
+                </div>
               </div>
             </template>
           </div>
@@ -135,7 +169,8 @@ export default {
   position: relative;
   background-color: rgba(0, 0, 0, 0.5);
   min-width: 200px;
-  min-height: 300px;
+  height: 300px;
+  overflow-y: auto;
 }
 
 p {
@@ -147,6 +182,10 @@ p {
 
 .title {
   padding: .3rem .5rem;
+}
+
+.cast {
+  padding: .5rem;
 }
 
 .cover {

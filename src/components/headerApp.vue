@@ -15,7 +15,8 @@ export default {
             movieApiList: ' https://api.themoviedb.org/3/discover/movie',
             key: '?api_key=9733f8fbead6e5ca09b6908231558d46',
             piùVotati: 'https://api.themoviedb.org/3/movie/top_rated',
-            linkHeader: ['Film più votati', 'Scopri Film']
+            linkHeader: ['Film più votati', 'Scopri Film'],
+            castLink: 'https://api.themoviedb.org/3/movie/550/credits'
         }
     },
     methods: {
@@ -59,6 +60,9 @@ export default {
             this.searchTv();
             this.searchMovie()
         },
+        getCast(id) {
+            `${creditLink}${key}`
+        }
     }
 }
 

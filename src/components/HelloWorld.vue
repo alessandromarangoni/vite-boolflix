@@ -6,25 +6,21 @@ export default {
   store,
   data() {
     return {
+      store,
       movieApiList: ' https://api.themoviedb.org/3/discover/movie',
       tvApiList: ' https://api.themoviedb.org/3/discover/tv',
       imgSrcPath: 'https://image.tmdb.org/t/p/w342/',
       key: '?api_key=9733f8fbead6e5ca09b6908231558d46',
-      store
+      idPath: 'https://api.themoviedb.org/3/movie',
     }
   },
   methods:
   {
-    consoleFilm() {
-      console.log('ciao' + this.store.film)
-    },
     popularsFilm() {
       axios.get(`${this.movieApiList}${this.key}`)
         .then(r => {
           this.store.film = (r.data.results)
           console.log(`${this.movieApiList}${this.key}`)
-          console.log(this.store.film)
-          console.log(this.store.film[0].title)
         })
     },
     popularsTv() {
@@ -32,10 +28,8 @@ export default {
         .then(r => {
           this.store.serie = (r.data.results)
           console.log(`${this.tvApiList}${this.key}`)
-          console.log(this.store.serie)
-          console.log(this.store.serie[0].name)
         })
-    }
+    },
   }
   , mounted() {
     this.popularsFilm()
@@ -54,7 +48,7 @@ export default {
           <div class="items_wrapper">
             <template v-for="(item) in this.store.film">
               <div class="oggetto">
-                <div class="cover">
+                <div class="cover " @click="getid(item.id)">
                   <img class="cover_img" :src="this.imgSrcPath + item.poster_path" :alt="item.title" />
                 </div>
                 <div class="title"> <strong>Titolo:</strong> {{ item.title }}</div>
@@ -139,7 +133,7 @@ export default {
 
 .oggetto {
   position: relative;
-  // background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   min-width: 200px;
   min-height: 300px;
 }

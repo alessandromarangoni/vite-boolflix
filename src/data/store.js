@@ -3,5 +3,6 @@ export const store = reactive({
     loading: true,
     film: [],
     serie: [],
-    voti: [],
+    // voti: [],
 })
+

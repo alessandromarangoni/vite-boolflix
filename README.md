@@ -10,4 +10,4 @@ Questo progetto è una riproduzione di una parte dell'app Netflix utilizzando il
 - Rendering dei dati in pagina: I dati dei film prelevati dall'API vengono resi dinamicamente in pagina, consentendo agli utenti di visualizzare i titoli, le immagini di copertina e altre informazioni rilevanti.
 - Ricerca interattiva: L'applicazione offre una funzionalità di ricerca per filtrare i film in base alle preferenze dell'utente. La ricerca viene implementata utilizzando la direttiva `v-bind` (o `:bind`) per associare il campo di ricerca a una variabile nell'applicazione.
 
-![come si presenta](/public/screenshot.png)
+![come si presenta](/public/screenshot.png)  

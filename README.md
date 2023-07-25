@@ -1,7 +1,13 @@
-# Vue 3 + Vite
+# Applicazione Vue.js - Riproduzione di una porzione dell'app Netflix
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Questo progetto è una riproduzione di una parte dell'app Netflix utilizzando il framework Vue.js. L'applicazione si basa su un'API esterna da cui vengono prelevati i dati dei film, che vengono poi visualizzati e resi disponibili per una ricerca interattiva utilizzando la direttiva `v-bind` (o `:bind`).
 
-## Recommended IDE Setup
+## Caratteristiche dell'applicazione:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Tecnologia utilizzata: Vue.js - un potente framework JavaScript per la creazione di interfacce utente reattive.
+- Riproduzione di una porzione di Netflix: L'applicazione emula una parte dell'interfaccia utente di Netflix, dove vengono mostrati elenchi di film disponibili.
+- Consumo di un'API esterna: L'applicazione utilizza un'API esterna per ottenere i dati dei film disponibili. Questo consente di visualizzare film reali con informazioni aggiornate.
+- Rendering dei dati in pagina: I dati dei film prelevati dall'API vengono resi dinamicamente in pagina, consentendo agli utenti di visualizzare i titoli, le immagini di copertina e altre informazioni rilevanti.
+- Ricerca interattiva: L'applicazione offre una funzionalità di ricerca per filtrare i film in base alle preferenze dell'utente. La ricerca viene implementata utilizzando la direttiva `v-bind` (o `:bind`) per associare il campo di ricerca a una variabile nell'applicazione.
+
+![come si presenta](/public/screenshot.png)
